@@ -24,6 +24,7 @@ var css_dir           = 'global/css',
  * Slides
  * Load slides folders
  */
+var SLIDES_TOTAL = 0;
 var slides = glob.sync('slides/slide_*').map(function(slide_dir) {
   return slide_dir;
 });
@@ -55,6 +56,7 @@ gulp.task('scripts', function () {
     .pipe(uglify());
 
   slides.forEach(function(slide_dir) {
+    SLIDES_TOTAL++
     global_js.pipe(gulp.dest(slide_dir +'/js'));
   });
 });
@@ -78,19 +80,40 @@ gulp.task('styles', function () {
  * Cleaning generated files
  */
 gulp.task('clean', function () {
-  console.log('slides: '+ typeof(slides));
-//  del(slides);
+  var files = [];
 
-//  slides.forEach(function(slide_dir) {
-//    application_css.pipe(gulp.dest(slide_dir +'/css'));
-//  });
+  slides.forEach(function(slide_dir) {
+    files.push(slide_dir +'/css/global.css');
+    files.push(slide_dir +'/js/global.js');
+  });
+
+  files.push(css_dir +'/global.css');
+
+  del(files);
+
+  // Reset config
+  var config = "var BUILDED = false;" +
+    "var SLIDES_TOTAL = 0;";
+  require('fs').writeFile('global/js/builded-config.js', config);
 });
+
+
+/**
+ * Generate config.js builded
+ */
+gulp.task('builded-config', function () {
+  var config = "var BUILDED = true;" +
+               "var SLIDES_TOTAL = "+ SLIDES_TOTAL +";";
+  require('fs').writeFile('global/js/builded-config.js', config);
+});
+
+
 
 
 /**
  * Default
  */
-gulp.task('default', [ 'styles', 'scripts' ], function () {
+gulp.task('default', [ 'styles', 'scripts', 'builded-config' ], function () {
 //  gulp.watch( scss_files, ['styles'] );
 });
 
