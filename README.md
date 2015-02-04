@@ -6,3 +6,6 @@ Go to folder project and execute:
 npm install
 
 gulp
+
+
+Open htp://localhost:4567
