@@ -32,11 +32,11 @@ var slides = glob.sync('slides/slide_*').map(function(slide_dir) {
 
 /**
  * Server
- * Show "build" folder on server in "http://localhost:4567"
+ * Show "BUILD" folder on server in "http://localhost:4567"
  */
 gulp.task('connect', function () {
   connect.server({
-    root: 'slides',
+    root: './',
     port: 4567
   });
 });
@@ -92,19 +92,19 @@ gulp.task('clean', function () {
   del(files);
 
   // Reset config
-  var config = "var BUILDED = false;" +
+  var config = "var BUILD = false;" +
     "var SLIDES_TOTAL = 0;";
-  require('fs').writeFile('global/js/builded-config.js', config);
+  require('fs').writeFile('global/js/build-config.js', config);
 });
 
 
 /**
- * Generate config.js builded
+ * Generate config.js BUILD
  */
-gulp.task('builded-config', function () {
-  var config = "var BUILDED = true;" +
+gulp.task('build-config', function () {
+  var config = "var BUILD = true;" +
                "var SLIDES_TOTAL = "+ SLIDES_TOTAL +";";
-  require('fs').writeFile('global/js/builded-config.js', config);
+  require('fs').writeFile('global/js/build-config.js', config);
 });
 
 
@@ -113,8 +113,8 @@ gulp.task('builded-config', function () {
 /**
  * Default
  */
-gulp.task('default', [ 'styles', 'scripts', 'builded-config' ], function () {
-//  gulp.watch( scss_files, ['styles'] );
+gulp.task('default', [ 'styles', 'scripts', 'build-config', 'connect' ], function () {
+  //gulp.watch( scss_files, ['styles'] );
 });
 
 

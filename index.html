@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <script src="global/js/libs/jquery.min.js"></script>
-  <script src="global/js/builded-config.js"></script>
+  <script src="global/js/build-config.js"></script>
 
   <script>
     function pad(a,b){return([1e15]+a).slice(-b)} // Leading Zeros https://gist.github.com/aemkei/1180489
@@ -18,7 +18,7 @@
     }
 
     function init(){
-      if (!BUILDED) {
+      if (!BUILD) {
         info("You need to build the project. Go to the folder project on Terminal and execute 'gulp'.");
 
       }else{
