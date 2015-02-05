@@ -1,5 +1,5 @@
 {
-  "name": "Veeba Gulp",
+  "name": "Veeba",
   "version": "1.0.0",
   "description": "Veeva structure using Gulp utitilies.",
   "main": "index.js",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/manumorante/veeva-gulp"
+    "url": "https://github.com/manumorante/veeva"
   },
   "author": "Manu Morante",
   "license": "ISC",
