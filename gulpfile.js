@@ -1,4 +1,18 @@
 /**
+ * Folder map
+ *
+ * | root
+ * |-- global
+ * |-- slides
+ * |---- slide_01
+ * |---- slide_02
+ * |---- slide_03
+ * |-- index.html
+ *
+ */
+
+
+/**
  * Dependencies
  */
 var gulp          = require('gulp'),
@@ -12,39 +26,32 @@ var gulp          = require('gulp'),
 
 
 /**
- * Directories
+ * CONFIG
+ * Configuration vars
  */
-var css_dir           = 'global/css',
-    scss_files        = css_dir +'/**/*.scss',
-    js_dir            = 'global/js',
-    js_files          = js_dir + '/**/*.js';
+var slides_folders    = 'slides/slide_*',         // Slide folders
+    css_dir           = 'global/css',             // Global styles directory
+    scss_files        = css_dir +'/**/*.scss',    // Global styles files
+    js_dir            = 'global/js',              // Global javascripts directory
+    js_files          = js_dir + '/**/*.js',      // Global javascript files
+    SLIDES_TOTAL      = 0;                        // Total slides (auto defined)
+
 
 
 /**
  * Slides
  * Load slides folders
  */
-var SLIDES_TOTAL = 0;
-var slides = glob.sync('slides/slide_*').map(function(slide_dir) {
+var slides = glob.sync(slides_folders).map(function(slide_dir) {
   return slide_dir;
 });
 
 
 /**
- * Server
- * Show "BUILD" folder on server in "http://localhost:4567"
- */
-gulp.task('connect', function () {
-  connect.server({
-    root: './',
-    port: 4567
-  });
-});
-
-
-/**
  * Javascripts
- * Concat JS files
+ * - Concat JS files in specific order.
+ * - Copy result 'global.js' file within each folder slide.
+ * - Define SLIDES_TOTAL counting slides.
  */
 gulp.task('scripts', function () {
   var global_js = gulp.src([
@@ -64,7 +71,8 @@ gulp.task('scripts', function () {
 
 /**
  * CSS
- * Compile SASS using Compass and copy into each slide folder
+ * - Compile and compress global styles using Compass.
+ * - Copy result 'global.css' file within each folder slide.
  */
 gulp.task('styles', function () {
   var application_css = gulp.src(css_dir +'/global.scss')
@@ -77,7 +85,10 @@ gulp.task('styles', function () {
 
 
 /**
- * Cleaning generated files
+ * CLEAN (individual task)
+ * - Clean all '.js' and '.css' generated.
+ * - Define project as 'unbuilt' 'BUILT = false'.
+ * - Difine total slides to 0. SLIDES_TOTAL = 0.
  */
 gulp.task('clean', function () {
   var files = [];
@@ -92,33 +103,50 @@ gulp.task('clean', function () {
   del(files);
 
   // Reset config
-  var config = "var BUILD = false;" +
+  var config = "var BUILT = false;" +
     "var SLIDES_TOTAL = 0;";
   require('fs').writeFile('global/js/build-config.js', config);
 });
 
 
 /**
- * Generate config.js BUILD
+ * BUILD CONFIG
+ * Generate built configuration
+ * - Define project as build.
+ * - Define total slides.
+ * - Save build-config.js file.
  */
 gulp.task('build-config', function () {
-  var config = "var BUILD = true;" +
+  var config = "var BUILT = true;" +
                "var SLIDES_TOTAL = "+ SLIDES_TOTAL +";";
-  require('fs').writeFile('global/js/build-config.js', config);
+
+  require('fs').writeFile(js_dir +'/build-config.js', config);
 });
 
 
+/**
+ * Watch
+ */
+gulp.task('watch', function () {
+  gulp.watch( scss_files, ['styles'] );
+  gulp.watch(   js_files, ['scripts'] );
+  //gulp.watch( 'slides', [ 'default' ] );
+});
+
+
+/**
+ * SERVER
+ * You can show the slides index on 'http://localhost:4567'.
+ */
+gulp.task('connect', function () {
+  connect.server({
+    root: '.',
+    port: 4567
+  });
+});
 
 
 /**
  * Default
  */
-gulp.task('default', [ 'styles', 'scripts', 'build-config', 'connect' ], function () {
-  //gulp.watch( scss_files, ['styles'] );
-});
-
-
-
-
-
-
+gulp.task('default', [ 'styles', 'scripts', 'build-config', 'watch', 'connect' ]);
