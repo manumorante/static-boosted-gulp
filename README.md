@@ -1,4 +1,4 @@
-# Veeva
+# Gulp Project
 Veeva structure using Gulp utitilies
 
 ## Install
