@@ -1,5 +1,5 @@
-# Gulp Project
-Site structure using Gulp utitilies
+# Static Boosted
+Boilerplate to static sites with NPM, Gulp and Bootstrap
 
 ## Install
 
