@@ -1,19 +1,10 @@
-/**
- * Config
- */
+// Config
+
+// Colors
+$brand-primary: #428bca;
+$brand-secondary: darken(#428bca, 10%);
 
 
-/**
- * Colors
- */
-
-$brand-primary:         #428bca;
-$brand-secondary:       darken(#428bca, 10%);
-
-
-/**
- * Typography
- */
-
-$font-brand:  "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-size-base:    16px;
+// Typography
+$font-brand: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-size-base: 16px;

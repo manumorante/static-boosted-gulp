@@ -1,53 +1,13 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title></title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-  <script src="global/js/libs/jquery.min.js"></script>
-  <script src="global/js/build-config.js"></script>
-
-  <script>
-    function pad(a,b){return([1e15]+a).slice(-b)} // Leading Zeros https://gist.github.com/aemkei/1180489
-
-    function info(text){
-      $(".info").append(text);
-    }
-
-    function init(){
-      if (!BUILT) {
-        info("You need to build the project. Go to the folder project on Terminal and execute 'gulp'.");
-
-      }else{
-        if(SLIDES_TOTAL>0){
-          var  $list = $('.list');
-          for(var i=1; i<= SLIDES_TOTAL; i++){
-            $list.append("<li><a href='slides/slide_"+ pad(i,2) +"/index.html'>Slide "+ i +"</a></li>");
-          }
-        } else {
-          info("There is no slides in the slides folder.");
-        }
-
-      }
-
-    }
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Static Boosted</title>
 </head>
-<body onload="init()">
-
-<div class="container">
-  <h1>Slides index</h1>
-
-  <ul class="list list-unstyled"></ul>
-
-  <div class="info"></div>
-</div>
-
-
-
+<body>
 
 </body>
 </html>

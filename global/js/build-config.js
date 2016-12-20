@@ -1,1 +1,0 @@
-var BUILT = false;var SLIDES_TOTAL = 0;

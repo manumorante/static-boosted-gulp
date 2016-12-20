@@ -5,12 +5,12 @@ Boilerplate to static sites with NPM, Gulp and Bootstrap
 
 Go to folder project and execute:
 
-```bash
-npm install
-gulp
+```
+$ npm install
+$ gulp
 ```
 
-And go to: http://localhost:4567
+And go to: **http://localhost:4567**
 
 ## Configuration
 
@@ -33,7 +33,6 @@ And go to: http://localhost:4567
 - gulp-concat
 - gulp-connect
 - gulp-uglify
-- gulp-uglify
 - gulp-compass
 - glob
 - del
@@ -41,13 +40,12 @@ And go to: http://localhost:4567
 
 ### Configuration
 
-```js
-var slides_folders    = 'slides/slide_*',         // Slide folders
-    css_dir           = 'global/css',             // Global styles directory
-    scss_files        = css_dir +'/**/*.scss',    // Global styles files
-    js_dir            = 'global/js',              // Global javascripts directory
-    js_files          = js_dir + '/**/*.js',      // Global javascript files
-    SLIDES_TOTAL      = 0;                        // Total slides (auto defined)
+```javascript
+var slides_folders  = 'slides/slide_*',       // Slide folders
+    css_dir         = 'global/css',           // Global styles directory
+    scss_files      = css_dir +'/**/*.scss',  // Global styles files
+    js_dir          = 'global/js',            // Global javascripts directory
+    js_files        = js_dir + '/**/*.js';    // Global javascript files
 ```
 
 ### Tasks
@@ -55,7 +53,6 @@ var slides_folders    = 'slides/slide_*',         // Slide folders
 #### Javascripts
 - Concat JS files in specific order.
 - Copy result 'global.js' file within each folder slide.
-- Define SLIDES_TOTAL counting slides.
 
 #### CSS
 - Compile and compress global styles using Compass.
@@ -63,16 +60,8 @@ var slides_folders    = 'slides/slide_*',         // Slide folders
 
 #### CLEAN (individual task)
 - Clean all '.js' and '.css' generated.
-- Define project as 'unbuilt' 'BUILT = false'.
-- Difine total slides to 0. SLIDES_TOTAL = 0.
-
-#### BUILD CONFIG
-Generate built configuration
-- Define project as build.
-- Define total slides.
-- Save build-config.js file.
 
 #### Default
 ```js
-gulp.task('default', [ 'styles', 'scripts', 'build-config', 'watch', 'connect' ]);
+gulp.task('default', [ 'styles', 'scripts', 'watch', 'connect' ]);
 ```
