@@ -1,4 +1,4 @@
-# Static Boosted
+# Static Boosted Gulp
 Boilerplate to static sites with NPM, Gulp and Bootstrap
 
 ## Install
